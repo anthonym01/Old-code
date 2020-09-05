@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+<style>
+body{
+    padding: 0px;
+    margin:0px;
+}
+/*  Graph tags, Copy these to your document*/
+
+.grapgcontainer{/*  Use this to position the graph  */
+    position: fixed;
+    top:0;
+    width:99vw;
+    height:98vh;
+    left:0;
+    overflow:hidden;
+    border:1vh solid black;
+}
+.graphtable{width:100%;height:100%;}
+
+.barcontainer{
+    width:100%;
+}
+
+.bar{
+    overflow: hidden;
+    width:0%;
+    background-color: black;
+    height:95%;
+    text-align:center;
+    font-size:14vh;
+    white-space: nowrap;
+    vertical-align:middle;
+    color:rgb(255, 255, 255);
+    text-shadow: 0px 0px 30px #000000;
+    border-radius: 0px 25px 25px 0px ;
+    transition: width,background-color;
+    transition-duration: 500ms;
+}</style>
+<title>Graph example</title>
+</head>
+<body>
+	<!--Copy this into your document-->
+	<div class="grapgcontainer">
+		<table class="graphtable">
+			<tr>
+				<th class="barcontainer">
+					<div class="bar" id="bar1"></div>
+				</th>
+			</tr>
+			<tr>
+				<th class="barcontainer">
+					<div class="bar" id="bar2"></div>
+				</th>
+			</tr>
+			<tr>
+				<th class="barcontainer">
+					<div class="bar" id="bar3"></div>
+				</th>
+			</tr>
+			<tr>
+				<th class="barcontainer">
+					<div class="bar" id="bar4"></div>
+				</th>
+			</tr>
+			<tr>
+				<th class="barcontainer">
+					<div class="bar" id="bar5"></div>
+				</th>
+			</tr>
+		</table>
+	</div>
+<script type="text/javascript">
+window.addEventListener('load',function(){
+    if(localStorage.getItem("cfg")){
+        config_handler.load();
+        config.loadcount++;
+        console.log('Page loaded '+config.loadcount);
+        config_handler.store();
+    }else{
+        config_handler.store();
+        config.loadcount++;
+        console.log('Page loaded '+config.loadcount);
+        config_handler.load();
+    }
+    tablegeneration.bars();
+    setInterval(() => {
+        config_handler.load();
+        console.table(config);
+        tablegeneration.bars();
+    }, 1000);
+});
+
+var config={
+    theme:"",
+    loadcount:0,
+    bar1:10,
+    bar2:30,
+    bar3:50,
+    bar4:70,
+    bar5:100,
+}
+
+config_handler={
+    load:function(){
+        config = JSON.parse(localStorage.getItem("cfg"));
+    },
+    store:function(){
+        localStorage.setItem("cfg",JSON.stringify(config));
+    },
+    delete:function(){
+        localStorage.clear("cfg");
+    },
+}
+
+
+/*This object controls the generation of the table*/
+tablegeneration={
+    bars:function(){//generates the bars
+        //gets numbers
+        var bar1 = config.bar1;
+        var bar2 = config.bar2;
+        var bar3 = config.bar3;
+        var bar4 = config.bar4;
+        var bar5 = config.bar5;
+        //displays numbers on bar
+        document.getElementById('bar1').innerHTML=bar1;
+        document.getElementById('bar2').innerHTML=bar2;
+        document.getElementById('bar3').innerHTML=bar3;
+        document.getElementById('bar4').innerHTML=bar4;
+        document.getElementById('bar5').innerHTML=bar5;
+
+        var totalvalue = bar1+bar2+bar3+bar4+bar5;
+        console.log(bar1,bar2,bar3,bar4,bar5,'Tatal: '+totalvalue);
+        
+        //finds percentages
+        var bar1cent=bar1/totalvalue*100;
+        var bar2cent=bar2/totalvalue*100;
+        var bar3cent=bar3/totalvalue*100;
+        var bar4cent=bar4/totalvalue*100;
+        var bar5cent=bar5/totalvalue*100;
+        console.log('Raw percentages: ',bar1cent,bar2cent,bar3cent,bar4cent,bar5cent);
+
+        //determines largest percentage
+        var largest=Math.max(bar1cent,bar2cent,bar3cent,bar4cent,bar5cent);
+        /*
+        if(bar1cent>largest){largest=bar1cent}
+        if(bar2cent>largest){largest=bar2cent}
+        if(bar3cent>largest){largest=bar3cent}
+        if(bar4cent>largest){largest=bar4cent}
+        if(bar5cent>largest){largest=bar5cent}*/
+        console.log('Largest: '+largest);
+
+        //narmalizes percentages to with the largest value being 100% e.g. 100/69*69 = 100%, and 100/69 * 50 = 72.46% all percentages scale in acordane to the largest value
+        var bar1centnormalized = (100/largest)*bar1cent;
+        var bar2centnormalized = (100/largest)*bar2cent;
+        var bar3centnormalized = (100/largest)*bar3cent;
+        var bar4centnormalized = (100/largest)*bar4cent;
+        var bar5centnormalized = (100/largest)*bar5cent;
+        console.log('Normalized percentages: ',bar1centnormalized,bar2centnormalized,bar3centnormalized,bar4centnormalized,bar5centnormalized);
+        
+        //outputs percentages to the graph
+        document.getElementById('bar1').style.width=(bar1centnormalized)+'%';
+        document.getElementById('bar2').style.width=(bar2centnormalized)+'%';
+        document.getElementById('bar3').style.width=(bar3centnormalized)+'%';
+        document.getElementById('bar4').style.width=(bar4centnormalized)+'%';
+        document.getElementById('bar5').style.width=(bar5centnormalized)+'%';
+        this.colors();
+    },
+    colors:function(){//Generates random color
+        var bar1='#'+Math.floor(Math.random()*16777215).toString(16);
+        var bar2='#'+Math.floor(Math.random()*16777215).toString(16);
+        var bar3='#'+Math.floor(Math.random()*16777215).toString(16);
+        var bar4='#'+Math.floor(Math.random()*16777215).toString(16);
+        var bar5='#'+Math.floor(Math.random()*16777215).toString(16);
+        console.log('Bar1 color: ',bar1,' Bar2 color: ',bar2,' Bar3 color: ',bar3,' Bar4 color: ',bar4,'Bar5 color: ',bar5);
+        document.getElementById('bar1').style.backgroundColor=bar1;
+        document.getElementById('bar2').style.backgroundColor=bar2;
+        document.getElementById('bar3').style.backgroundColor=bar3;
+        document.getElementById('bar4').style.backgroundColor=bar4;
+        document.getElementById('bar5').style.backgroundColor=bar5;
+    },
+}
+</script>
+</body>
+</html>

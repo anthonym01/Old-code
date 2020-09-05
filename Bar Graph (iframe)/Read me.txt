@@ -1,0 +1,3 @@
+Created to test transfering data between web pages without using the API
+
+Load both pages to start

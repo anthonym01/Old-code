@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="setting-gear-512.png" type="image/png" sizes="32x32">
+<style>
+/*  Animations  */
+@keyframes fade {from { opacity: 0.8; } 50% { opacity: 0.4; } to { opacity: 0.8; }}
+.blink {animation:fade 5000ms infinite;}
+
+/*  Portrait/default layout */
+body{
+    padding:0px;
+    margin:0px;
+}
+body::before{/* Remove upon deployment*/
+    position: absolute;
+    z-index:-1;
+    content:"Prototype Control Pannel";
+    font-size:3vh;
+    bottom:0vh;
+    height:auto;
+    width:98vw;
+    white-space: nowrap;
+    text-align: center;
+    animation:fade 3000ms infinite;
+}
+td{
+    padding: 0px;
+    margin:0px;
+}
+        /*  GraphIPO menu*/
+IPOmenu{
+    position: fixed;
+    top:0;
+    left:5vw;
+    width:90vh;
+    z-index:50;
+}
+.inputwarning{
+    display:none;
+    top:0;
+    left:0;
+    padding: 5px;
+    font-size:3vh;
+    color:red;
+    background-color: black;
+    border-bottom:1px solid red;
+    border-right:1px solid red;
+    border-left:1px solid red;
+    border-radius: 15px;
+}
+.inforput{
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: solid;
+    border-width: 1vh;
+    border-color:black;
+    font-size:8vh;
+    align-content: center;
+    align-self: baseline;
+    text-align:center;
+    float:left;
+}
+.put_title{
+    font-size:8vh;
+    white-space: nowrap;
+}
+.inforput:hover{
+    border-color:rgb(62, 129, 255);
+    color:rgb(62, 129, 255);
+    text-shadow:0px 0px 25px rgba(62, 130, 255, 0.507);
+}
+</style>
+<title>Graph control pannel</title>
+</head>
+<body>
+<IPOmenu>
+    <table>
+        <tr>
+            <td class="put_title">Bar #1:</td>
+            <td>
+                <input type="text" placeholder="bar #1" class="inforput" id="barput1">
+            </td>
+        </tr>
+        <tr>
+            <td class="put_title">Bar #2:</td>
+            <td>
+                <input type="text" placeholder="bar #2" class="inforput" id="barput2">
+            </td>
+        </tr>
+        <tr>
+            <td class="put_title">Bar #3:</td>
+            <td>
+                <input type="text" placeholder="bar #3" class="inforput" id="barput3">
+            </td>
+        </tr>
+        <tr>
+            <td class="put_title">Bar #4:</td>
+            <td>
+                <input type="text" placeholder="bar #4" class="inforput" id="barput4">
+            </td>
+        </tr>
+        <tr>
+            <td class="put_title">Bar #5:</td>
+            <td>
+                    <input type="text" placeholder="bar #5" class="inforput" id="barput5"><div class="inputwarning" id="error">Not a number!!</div>
+            </td>
+        </tr>
+    </table>
+</IPOmenu>
+<script type="text/javascript">
+window.addEventListener('load',function(){
+    if(localStorage.getItem("cfg")){
+        config_handler.load();
+    }else{
+        config_handler.store();
+    }
+});
+
+var config={
+    theme:"",
+    loadcount:0,
+    bar1:10,
+    bar2:30,
+    bar3:50,
+    bar4:70,
+    bar5:100,
+}
+config_handler={
+    load:function(){
+        config = JSON.parse(localStorage.getItem("cfg"));
+        document.getElementById('barput1').value=config.bar1;
+        document.getElementById('barput2').value=config.bar2;
+        document.getElementById('barput3').value=config.bar3;
+        document.getElementById('barput4').value=config.bar4;
+        document.getElementById('barput5').value=config.bar5;
+    },
+    store:function(){
+        localStorage.setItem("cfg",JSON.stringify(config));
+    },
+    delete:function(){
+        localStorage.clear("cfg");
+    },
+    savevalues:function(){
+        config.bar1=document.getElementById('barput1').value;
+        config.bar2=document.getElementById('barput2').value;
+        config.bar3=document.getElementById('barput3').value;
+        config.bar4=document.getElementById('barput4').value;
+        config.bar5=document.getElementById('barput5').value;
+        this.store();
+    }
+}
+
+table_input_handling = {
+    input1check:document.getElementById('barput1').addEventListener('keydown',function(){
+        setTimeout(function(){
+            var barput1 = document.getElementById('barput1').value;
+            if(!isNaN(barput1)){
+                //checkval();
+                config_handler.savevalues();
+                document.getElementById('error').style.display="none";
+                document.getElementById('barput1').style=""
+            }else{
+                document.getElementById('error').style.display="block";
+                document.getElementById('barput1').style="color:red;border-color:red;"
+            }
+        },50);
+    }),
+    input1check:document.getElementById('barput2').addEventListener('keydown',function(){
+        setTimeout(function(){
+            var barput1 = document.getElementById('barput2').value;
+            if(!isNaN(barput1)){
+                //checkval();
+                config_handler.savevalues();
+                document.getElementById('error').style.display="none";
+                document.getElementById('barput2').style=""
+            }else{
+                document.getElementById('error').style.display="block";
+                document.getElementById('barput2').style="color:red;border-color:red;"
+            }
+        },50);
+    }),
+    input1check:document.getElementById('barput3').addEventListener('keydown',function(){
+        setTimeout(function(){
+            var barput1 = document.getElementById('barput3').value;
+            if(!isNaN(barput1)){
+                //checkval();
+                config_handler.savevalues();
+                document.getElementById('error').style.display="none";
+                document.getElementById('barput3').style=""
+            }else{
+                document.getElementById('error').style.display="block";
+                document.getElementById('barput3').style="color:red;border-color:red;"
+            }
+        },50);
+    }),
+    input1check:document.getElementById('barput4').addEventListener('keydown',function(){
+        setTimeout(function(){
+            var barput1 = document.getElementById('barput4').value;
+            if(!isNaN(barput1)){
+                //checkval();
+                config_handler.savevalues();
+                document.getElementById('error').style.display="none";
+                document.getElementById('barput4').style=""
+            }else{
+                document.getElementById('error').style.display="block";
+                document.getElementById('barput4').style="color:red;border-color:red;"
+            }
+        },50);
+    }),
+    input1check:document.getElementById('barput5').addEventListener('keydown',function(){
+        setTimeout(function(){
+            var barput1 = document.getElementById('barput5').value;
+            if(!isNaN(barput1)){
+                //checkval();
+                config_handler.savevalues();
+                document.getElementById('error').style.display="none";
+                document.getElementById('barput5').style=""
+            }else{
+                document.getElementById('error').style.display="block";
+                document.getElementById('barput5').style="color:red;border-color:red;"
+            }
+        },50);
+    }),
+    trigergeneration:function(){
+        config_handler.savevalues();
+    }
+}
+
+</script>
+</body>
+</html>
