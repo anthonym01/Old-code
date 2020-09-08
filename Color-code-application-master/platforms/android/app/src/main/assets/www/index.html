@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" id="maincss" href="css/AMOLED-dark_theme.css">
+    <title>Color Codes</title>
+</head>
+<body>
+    <div id="loadingscreen">Color Codes<br><div id="loader"></div></div><!--Loading screen (purely cosmetic)-->
+    <div id="pageshade"></div><!--Page shades-->
+    <!--Header-->
+    <div id="header">
+        <div id="menubtn"></div>
+        <div id="headertxt">RGB</div>
+        <div id="header_shutter" class="header_shutter"></div>
+    </div>
+    
+    <!--Menu-->
+    <div id="menuholder">
+        <div id="menuicon"></div>
+        <div id="RGB_menubtn" class="menubtn">
+            <div class="menubtnicon" id="RGB_icon"></div>
+            <div class="menubtntxt">RGB</div>
+        </div>
+        <div id="HSL_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="HSL_icon"></div>
+            <div class="menubtntxt">HSL</div>
+        </div>
+        <div id="HEX_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="HEX_icon"></div>
+            <div class="menubtntxt">HEX</div>
+        </div>
+        <div id="CONVERT_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="CONVERSION_icon"></div>
+            <div class="menubtntxt">Convert</div>
+        </div>
+        <div id="SETTING_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="setting_icon"></div>
+            <div class="menubtntxt">Settings</div>
+        </div>
+        <div id="ABOUT_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="about_icon"></div>
+            <div class="menubtntxt">About</div>
+        </div>
+        <div id="EXIT_menubtn" class="menubtn_dulled">
+            <div class="menubtnicon" id="exit_icon"></div>
+            <div class="menubtntxt">Exit</div>
+        </div>
+    </div>
+    
+    <!--App 'Views'-->
+
+    <!--RGB view console-->
+    <view id="RGBview">
+        <div class="label" id="redlabel">RED</div>
+        <input type="range" max="255" min="0" id="RED_slider" class="slider">
+        <div class="label" id="greenlabel">GREEN</div>
+        <input type="range" max="255" min="0" id="GREEN_slider" class="slider">
+        <div class="label" id="bluelabel">BLUE</div>
+        <input type="range" max="255" min="0" id="BLUE_slider" class="slider">
+        <code id="RGB_index">RGB( # , # , # )</code>
+        <button type="button" id="randRGB">Random RGB</button>
+    </view>
+
+    <!--HSL view console-->
+    <view id="HSL_view">
+        <div class="label" id="huelabel">HUE</div>
+        <input type="range" max="360" min="0" id="HUE_slider" class="slider">
+        <div class="label" id="saturationlabel">SATURATION</div>
+        <input type="range" max="100" min="0" id="SATURATION_slider" class="slider">
+        <div class="label" id="lightnesslabel">LIGHTNESS</div>
+        <input type="range" max="100" min="0" id="LIGHTNESS_slider" class="slider">
+        <code id="HSL_index" >HSL( # , # , # )</code>
+        <button type="button" id="randHSL">Random HSL</button>
+    </view>
+
+    <!--Hex view console-->
+    <view id="HEX_view">
+        <input type="text" id="HEX_put" placeholder="#ffffff">
+        <div class="hexscroller">
+            <button class="hexbtn" id="_ff1500">#ff1500</button>
+            <button class="hexbtn" id="_e81d1d">#e81d1d</button>
+            <button class="hexbtn" id="_e8b71d">#e8b71d</button>
+            <button class="hexbtn" id="_e3e81d">#e3e81d</button>
+            <button class="hexbtn" id="_1de840">#1de840</button>
+            <button class="hexbtn" id="_1ddde8">#1ddde8</button>
+            <button class="hexbtn" id="_2b1de8">#2b1de8</button>
+            <button class="hexbtn" id="_dd00f3">#dd00f3</button>
+            <button class="hexbtn" id="_000000">#000000</button>
+            <button class="hexbtn" id="_ffffff">#ffffff</button>
+        </div>
+        <button id="randHEX">Random HEX</button>
+    </view>
+
+    <!--Convery view console-->
+    <view id="CONVERT_view">
+        <div class="subpannel">
+            <div class="subpannelbtn" id="RGBbtn">RGB</div>
+            <div class="subpannelbtn_dead" id="HSLbtn">HSL</div>
+            <div class="subpannelbtn_dead" id="HEXbtn">HEX</div>
+        </div>
+        <subview id="RGB_conversion_subview"><!--   RGB conversion interface    -->
+            <div class="labels label1">RED</div>
+            <div class="input_container1" id="red_put_container">
+                <div class="downbtn" id="redput_downbtn"></div>
+                <div class="upbtn" id="redput_upbtn"></div>
+                <input type="number" max="255" min="0" id="red_input" value="122">
+                <div class="bar" id="red_bar"></div>
+            </div>
+            <div class="labels label2">GREEN</div>
+            <div class="input_container2" id="green_put_container">
+                <div class="downbtn" id="greenput_downbtn"></div>
+                <div class="upbtn" id="greenput_upbtn"></div>
+                <input type="number" max="255" min="0" id="green_input" value="122">
+                <div class="bar" id="green_bar"></div>
+            </div>
+            <div class="labels label3">BLUE</div>
+            <div class="input_container3" id="blue_put_container">
+                <div class="downbtn" id="blueput_downbtn"></div>
+                <div class="upbtn" id="blueput_upbtn"></div>
+                <input type="number" max="255" min="0" id="blue_input" value="122">
+                <div class="bar" id="blue_bar"></div>
+            </div>
+            <div class="colorpreview" id="colorpreview_RGB"><div class="colorpreview_text" id="colorpreview_text_RGB">COLOUR Preview</div></div>
+            <div class="colorpreview_joint" id="colorpreview_RGB_joint">
+                <code id="RGB_HEX_conversion">Hex placeholder</code>
+                <code id="RGB_HSL_conversion">HSL placeholder</code>
+            </div>
+        </subview>
+        <subview id="HSL_conversion_subview"><!--   HSL conversion interface    -->
+            <div class="labels label1">Hue</div>
+            <div class="input_container1" id="hue_put_container">
+                <div class="downbtn" id="hueput_downbtn"></div>
+                <div class="upbtn" id="hueput_upbtn"></div>
+                <input type="number" max="360" min="0" id="hue_input" value="122">
+                <div class="bar" id="hue_bar"></div>
+            </div>
+            <div class="labels label2">Saturation</div>
+            <div class="input_container2" id="sat_put_container">
+                <div class="downbtn" id="satput_downbtn"></div>
+                <div class="upbtn" id="satput_upbtn"></div>
+                <input type="number" max="100" min="0" id="sat_input" value="122">
+                <div class="bar" id="sat_bar"></div>
+            </div>
+            <div class="labels label3">Lightness</div>
+            <div class="input_container3" id="light_put_container">
+                <div class="downbtn" id="lightput_downbtn"></div>
+                <div class="upbtn" id="lightput_upbtn"></div>
+                <input type="number" max="100" min="0" id="light_input" value="122">
+                <div class="bar" id="light_bar"></div>
+            </div>
+            <div class="colorpreview" id="colorpreview_HSL"><div class="colorpreview_text" id="colorpreview_text_HSL">COLOUR Preview</div></div>
+            <div class="colorpreview_joint" id="colorpreview_HSL_joint">
+                <code id="HSL_RGB_conversion">RGB placeholder</code>
+                <code id="HSL_HEX_conversion">HEX placeholder</code>
+            </div>
+        </subview>
+        <subview id="HEX_conversion_subview">
+            <input type="text" id="HEX_put2" placeholder="#ffffff">
+            <div id="colorpreview_hex">
+                <div id="colorpreview_text_hex">COLOUR Preview</div>
+                <code id="HEX_RGB_conversion">RGB placeholder</code>
+                <code id="HEX_HSL_conversion">HEX placeholder</code>
+            </div>
+        </subview>
+        
+    </view>
+
+    <!--Settings view console-->
+    <view id="settings_view">
+        <table class="setting_tabbler">
+            <tr>
+                <td class="label">Theme:</td>
+                <td class="actuator">
+                    <div class="switch_container_active"id="theme_container">
+                        <div class="switchbdy" id="themeswitchbdy">
+                            <div id="themeswitchbtn" class="switch"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr>
+                <td class="label">colorfull header:</td>
+                <td class="actuator">
+                    <div class="switch_container_active"id="colorheader_container">
+                        <div class="switchbdy" id="colorheaderwitchbdy">
+                            <div id="colorheaderswitchbtn" class="switch"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">Aggressive mode:</td>
+                <td class="actuator">
+                    <div class="switch_container_active"id="aggressivemode_container">
+                        <div class="switchbdy" id="aggressivemodeswitchbdy">
+                            <div id="aggressivemodeswitchbtn" class="switch"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div id="tick_gear"></div><!--Gear ticks every second-->
+    </view>
+
+    <!--About view-->
+    <view id="about_view">
+        <table class="about_tabler">
+            <tr>
+                <td class="about_tabler_label">App version:</td>
+                <td class="about_tabler_actuator_dead">
+                    v1.8.2
+                </td>
+            </tr>
+            <tr>
+                <td class="about_tabler_label">App Used:</td>
+                <td class="about_tabler_actuator_dead" id="usecount">
+                    1 times
+                </td>
+            </tr>
+            <tr>
+                <td class="about_tabler_label">Developer:</td>
+                <td class="about_tabler_actuator" id="name_btn">
+                    Samuel A. Matheson
+                </td>
+            </tr>
+            <tr>
+                <td class="about_tabler_label">email:</td>
+                <td class="about_tabler_actuator" id="email_btn">samuelmatheson15@gmail.com</td>
+            </tr>
+            <tr>
+                <td class="about_tabler_label">Phone#:</td>
+                <td class="about_tabler_actuator" id="phone_numberbtn">+1 (876) 574-4801</td>
+            </tr>
+        </table>
+    </view>
+    
+<!--Hidden temporary stuff to stop the script from breaking-->
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

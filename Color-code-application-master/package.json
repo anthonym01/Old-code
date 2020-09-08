@@ -1,0 +1,34 @@
+{
+  "name": "color_codes",
+  "displayName": "Color Codes",
+  "version": "1.8.2",
+  "description": "Hexidecimal, RGB and HSL color Codes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova": "^9.0.0",
+    "cordova-android": "^8.0.0",
+    "cordova-electron": "^1.1.0",
+    "cordova-plugin-statusbar": "^2.4.3"
+  },
+  "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.3"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {}
+    },
+    "platforms": [
+      "android",
+      "electron"
+    ]
+  }
+}

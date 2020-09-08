@@ -1,0 +1,647 @@
+@font-face {
+    src: url(../fonts/handwriting-black-draft_DEMO.otf);
+    font-family: handwriting;
+}
+
+/*
+Google fonts
+font-family: 'Roboto', sans-serif;
+font-family: 'Lexend Deca', sans-serif;
+*/
+
+/* Adamptive color scheme */
+@media screen {
+    :root {
+        --text-color: rgb(0, 0, 0);
+        --background-color: rgb(255, 255, 255);
+        --accent-color: hsl(0, 0%, 0%);
+        --button_depth: translate(0%, 4%);
+        --grey: rgb(122, 122, 122);
+        --accelorator: 60%;
+        --primary_hue: 0;
+        --saturator: 0%;
+        --off_grey: rgb(200, 200, 200);
+        --default_usr_icon: url('../img/userdefault_light.webp');
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --text-color: rgb(255, 255, 255);
+            --background-color: rgb(0, 0, 0);
+            --accent-color: hsl(0, 0%, 100%);
+            --button_depth: translate(0%, 4%);
+            --grey: rgb(122, 122, 122);
+            --accelorator: 40%;
+            --primary_hue: 0;
+            --saturator: 0%;
+
+            --off_grey: rgb(58, 58, 58);
+            --default_usr_icon: url('../img/userdefault_dark.webp');
+        }
+    }
+
+    .dark {
+        --text-color: rgb(255, 255, 255);
+        --background-color: rgb(0, 0, 0);
+        --accent-color: hsl(0, 0%, 100%);
+        --button_depth: translate(0%, 4%);
+        --grey: rgb(122, 122, 122);
+        --accelorator: 40%;
+        --primary_hue: 0;
+        --saturator: 0%;
+        --off_grey: rgb(58, 58, 58);
+        --default_usr_icon: url('../img/userdefault_dark.webp');
+    }
+
+    .light {
+        --text-color: rgb(0, 0, 0);
+        --background-color: rgb(255, 255, 255);
+        --accent-color: hsl(0, 0%, 0%);
+        --button_depth: translate(0%, 4%);
+        --grey: rgb(122, 122, 122);
+        --off_grey: rgb(200, 200, 200);
+        --accelorator: 60%;
+        --primary_hue: 0;
+        --saturator: 0%;
+        --default_usr_icon: url('../img/userdefault_light.webp');
+    }
+
+    ._0 {
+        --accent-color: hsl(0, 100%, 50%);
+        --primary_hue: 0;
+        --saturator: 100%;
+    }
+
+    ._30 {
+        --accent-color: hsl(30, 100%, 50%);
+        --primary_hue: 30;
+        --saturator: 100%;
+    }
+
+    ._60 {
+        --accent-color: hsl(60, 100%, 50%);
+        --primary_hue: 60;
+        --saturator: 100%;
+    }
+
+    ._90 {
+        --accent-color: hsl(90, 100%, 50%);
+        --primary_hue: 90;
+        --saturator: 100%;
+    }
+
+    ._120 {
+        --accent-color: hsl(120, 100%, 50%);
+        --primary_hue: 120;
+        --saturator: 100%;
+    }
+
+    ._150 {
+        --accent-color: hsl(150, 100%, 50%);
+        --primary_hue: 150;
+        --saturator: 100%;
+    }
+
+    ._180 {
+        --accent-color: hsl(180, 100%, 50%);
+        --primary_hue: 180;
+        --saturator: 100%;
+    }
+
+    ._210 {
+        --accent-color: hsl(210, 100%, 50%);
+        --primary_hue: 210;
+        --saturator: 100%;
+    }
+
+    ._240 {
+        --accent-color: hsl(240, 100%, 50%);
+        --primary_hue: 240;
+        --saturator: 100%;
+    }
+
+    ._270 {
+        --accent-color: hsl(270, 100%, 50%);
+        --primary_hue: 270;
+        --saturator: 100%;
+    }
+
+    ._300 {
+        --accent-color: hsl(300, 100%, 50%);
+        --primary_hue: 300;
+        --saturator: 100%;
+    }
+
+    ._330 {
+        --accent-color: hsl(330, 100%, 50%);
+        --primary_hue: 330;
+        --saturator: 100%;
+    }
+
+    body {
+        color: var(--text-color);
+        background-color: var(--background-color);
+        margin: 0;
+        font-family: 'Lexend Deca', sans-serif;
+    }
+
+    .mainview,
+    .mainview_active {
+        position: absolute;
+        top: 3em;
+        right: 0;
+        height: calc(100% - 3em);
+        width: 100%;
+        display: none;
+        filter: blur(1);
+        transition: filter 300ms;
+    }
+
+    .mainview_active {
+        display: block;
+        /*filter: blur(1);*/
+    }
+
+    /* Login screen */
+    #login_Screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background-color);
+    }
+
+    #logincontainer {
+        /* Needs rework */
+        position: relative;
+        margin-top: 20vh;
+        margin-left: auto;
+        margin-right: auto;
+        height: 60vh;
+        width: 60vw;
+        height: fit-content;
+    }
+
+    #logincontainer input {
+        position: relative;
+        width: calc(100% - 1em);
+        /*height: 3em;*/
+        padding: 0.5em;
+        margin-top: 1.3em;
+        font-size: 2.5em;
+        background-color: var(--off_grey);
+        color: var(--text-color);
+        border: none;
+        border-radius: 3em;
+        text-align: center;
+        -webkit-appearance: none;
+        transition: background-color 300ms;
+    }
+
+    #logincontainer input:focus {
+        background-color: hsl(var(--primary_hue), var(--saturator), var(--accelorator));
+    }
+
+    #liginbtn {
+        position: relative;
+        width: calc(100% - 1em);
+        /*height: 3em;*/
+        padding: 0.5em;
+        margin-top: 1em;
+        font-size: 3em;
+        background-color: hsl(var(--primary_hue), var(--saturator), var(--accelorator));
+        color: var(--text-color);
+        border: none;
+        border-radius: 3em;
+        text-align: center;
+        -webkit-appearance: none;
+        transition: background-color 300ms, color 300ms, transform 300ms;
+        cursor: pointer;
+        transform: translate(0, 0);
+        -webkit-user-select: none;
+    }
+
+    #liginbtn:hover {
+        background-color: var(--accent-color);
+        color: var(--background-color);
+    }
+
+    #liginbtn:active {
+        transition: transform 0ms;
+        transform: var(--button_depth);
+    }
+
+    #logout_button {
+        /*height: 3em;*/
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        padding: 0.2em;
+        margin-top: 0em;
+        font-size: 1.2em;
+        background-color: hsl(var(--primary_hue), var(--saturator), var(--accelorator));
+        color: var(--text-color);
+        border: none;
+        border-radius: 3em;
+        text-align: center;
+        -webkit-appearance: none;
+        transition: transform 300ms;
+        cursor: pointer;
+        transform: translate(0, 0);
+        -webkit-user-select: none;
+    }
+
+    #logout_button:active {
+        transition: transform 0ms;
+        transform: var(--button_depth);
+    }
+
+    /*Headbar*/
+    .headbar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 3em;
+        width: 100%;
+        /*background-color: var(--grey);*/
+        background-image: linear-gradient(180deg,
+                hsla(var(--primary_hue), var(--saturator), var(--accelorator), 0.4),
+                hsla(var(--primary_hue), var(--saturator), var(--accelorator), 0.3),
+                hsla(var(--primary_hue), var(--saturator), var(--accelorator), 0.2),
+                hsla(var(--primary_hue), var(--saturator), var(--accelorator), 0.1),
+                hsla(var(--primary_hue), var(--saturator), var(--accelorator), 0.0));
+    }
+
+    #titleselector {
+        position: absolute;
+        top: 0.4em;
+        left: 1em;
+        font-size: 1.5em;
+        align-content: center;
+        vertical-align: center;
+    }
+
+    /* Test selector */
+    .test_select_container {
+        position: relative;
+        margin-top: 1em;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        width: 90vw;
+        height: fit-content;
+        min-height: 70vh;
+        font-size: 1.3em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .exam_pedistal {
+        position: relative;
+        height: 10em;
+        width: 15em;
+        margin: 0.5em;
+        background: linear-gradient(135deg, #fff, #333);
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 0.2em;
+        transition: transform 300ms, box-shadow 300ms;
+        box-shadow: 0.2em 0.2em 0.8em 0em var(--accent-color);
+        transform: translate(0, 0);
+    }
+
+    .exam_pedistal:hover {
+        box-shadow: 0em 0em 0.8em 0.2em var(--accent-color);
+        transform: translate(0, -2%);
+    }
+
+    .exam_pedistal:active {
+        transform: var(--button_depth);
+        transition: transform 0ms;
+    }
+
+    .exam_pedistal::after {
+        /* Apperant gleen over img */
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200%;
+        transform: rotate(-45deg) translate(-200%, -300%);
+        background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.4), hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0.2), hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0));
+        transition: transform 300ms;
+    }
+
+    .exam_pedistal:hover::after {
+        transform: rotate(-35deg) translate(-20%, -75%);
+    }
+
+    .exam_pedistal .pediastal_face {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        height: 96%;
+        width: 96%;
+        background-color: var(--background-color);
+    }
+
+    .pediastal_face .title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.5em;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5em;
+        align-self: center;
+    }
+
+    .pediastal_face .details {
+        position: absolute;
+        top: 2em;
+        left: 2%;
+        width: 96%;
+        height: calc(100% -2em);
+        text-align: center;
+        font-size: 1em;
+        align-self: center;
+        overflow: hidden;
+    }
+
+    .pediastal_face .details ::-webkit-scrollbar {
+        width: 0;
+        display: none;
+        background: none;
+    }
+
+    /* Test taker */
+    #Questin_box {
+        position: relative;
+        height: fit-content;
+        min-height: 20vh;
+        font-size: 1.7em;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1em;
+        text-align: center;
+        align-content: center;
+    }
+
+    #answer_box {
+        position: relative;
+        height: fit-content;
+        min-height: 20vh;
+        font-size: 1.3em;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1em;
+        text-align: center;
+        align-content: center;
+    }
+
+    .answer_bar {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        min-height: 1em;
+        cursor: pointer;
+        border-radius: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+
+    .answer_bar:hover {
+        box-shadow: 0em 0em 0.7em 0.1em var(--accent-color);
+    }
+
+    .answer_text {
+        position: relative;
+        margin-left: 10%;
+        width: 90%;
+        height: fit-content;
+        text-align: left;
+    }
+
+    /* Setting pannel */
+    .usericon_anchor {
+        position: absolute;
+        top: 0.1em;
+        right: 0.5em;
+        height: 2.8em;
+        width: 2.8em;
+        border-radius: 3em;
+        background: linear-gradient(135deg, #fff, #333);
+        cursor: pointer;
+
+        -webkit-user-select: none;
+        /* prevent copy paste, to allow, change 'none' to 'text' */
+    }
+
+    .usericon_pallet {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        background-size: contain;
+        background-position: center;
+        background-image: var(--default_usr_icon);
+    }
+
+    .setting_pannel,
+    .setting_pannel_active {
+        position: absolute;
+        top: 3em;
+        right: 0;
+        height: 40em;
+        width: 20em;
+        background-color: var(--background-color);
+        overflow: hidden;
+        display: none;
+    }
+
+    .setting_pannel_active {
+        display: block;
+    }
+
+
+    .settingtitle {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        /*font-size: 2em;*/
+        text-align: center;
+    }
+
+    .setting_tabler {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+    }
+
+    .setting_tabler td {
+        height: fit-content;
+        align-items: center;
+        align-content: center;
+        /*font-size: 1em;*/
+        text-align: center;
+        cursor: default;
+        /*-webkit-user-select: none;*/
+    }
+
+    .theme_bar,
+    .theme_bar_2 {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        height: fit-content;
+        width: 100%;
+    }
+
+    .theme_bar .themebtn_container {
+        position: relative;
+        height: fit-content;
+        width: 33.3%;
+    }
+
+    .thembtn,
+    .themebtn_active {
+        font-size: 1em;
+        padding: 0.5em;
+        height: fit-content;
+        width: 80%;
+        border-radius: 2em;
+        text-align: center;
+        box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0);
+        margin: auto;
+        transition: box-shadow 300ms, transform 300ms;
+        cursor: pointer;
+        transform: translate(0, 0);
+        -webkit-user-select: none;
+    }
+
+    .thembtn:active {
+        transition: box-shadow 300ms, transform 00ms;
+        transform: var(--button_depth)
+    }
+
+    .themebtn_active {
+        box-shadow: 0em 0em 0.5em 0.1em var(--accent-color);
+    }
+
+    #dark_theme_btn {
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+    }
+
+    #light_theme_btn {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+    }
+
+    .semi_title {
+        height: fit-content;
+        align-items: center;
+        align-content: center;
+        font-size: 1.7em;
+        text-align: center;
+        padding-top: 0.6em;
+    }
+
+    .accent-color-selector {
+        position: relative;
+        height: fit-content;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .accent_blob,
+    .accent_blob_active {
+        position: relative;
+        height: 4em;
+        width: 4em;
+        background-color: var(--text-color);
+        color: var(--background-color);
+        margin: 0.4em;
+        border-radius: 1em;
+        cursor: pointer;
+        transition: background-color 300ms, color 300ms, box-shadow 300ms, transform 300ms;
+        transform: translate(0, 0);
+    }
+
+    .accent_blob:active {
+        transition: background-color 300ms, color 300ms, box-shadow 300ms, transform 0ms;
+        transform: var(--button_depth);
+    }
+
+    .accent_blob_active {
+        box-shadow: 0vh 0em 1em 0.1em var(--accent-color);
+    }
+
+    #hue0-selec {
+        background-image: linear-gradient(120deg, hsl(0, 100%, 50%), hsl(0, 100%, var(--accelorator)));
+    }
+
+    #hue30-selec {
+        background-image: linear-gradient(120deg, hsl(30, 100%, 50%), hsl(30, 100%, var(--accelorator)));
+    }
+
+    #hue60-selec {
+        background-image: linear-gradient(120deg, hsl(60, 100%, 50%), hsl(60, 100%, var(--accelorator)));
+    }
+
+    #hue90-selec {
+        background-image: linear-gradient(120deg, hsl(90, 100%, 50%), hsl(90, 100%, var(--accelorator)));
+    }
+
+    #hue120-selec {
+        background-image: linear-gradient(120deg, hsl(120, 100%, 50%), hsl(120, 100%, var(--accelorator)));
+    }
+
+    #hue150-selec {
+        background-image: linear-gradient(120deg, hsl(150, 100%, 50%), hsl(150, 100%, var(--accelorator)));
+    }
+
+    #hue180-selec {
+        background-image: linear-gradient(120deg, hsl(180, 100%, 50%), hsl(180, 100%, var(--accelorator)));
+    }
+
+    #hue210-selec {
+        background-image: linear-gradient(120deg, hsl(210, 100%, 50%), hsl(210, 100%, var(--accelorator)));
+    }
+
+    #hue240-selec {
+        background-image: linear-gradient(120deg, hsl(240, 100%, 50%), hsl(240, 100%, var(--accelorator)));
+    }
+
+    #hue270-selec {
+        background-image: linear-gradient(120deg, hsl(270, 100%, 50%), hsl(270, 100%, var(--accelorator)));
+    }
+
+    #hue300-selec {
+        background-image: linear-gradient(120deg, hsl(300, 100%, 50%), hsl(300, 100%, var(--accelorator)));
+    }
+
+    #hue330-selec {
+        background-image: linear-gradient(120deg, hsl(330, 100%, 50%), hsl(330, 100%, var(--accelorator)));
+    }
+
+    #dev_link {
+        color: var(--accent-color);
+    }
+}
+
+/* Tablet / tall aspact ratio */
+@media screen and (min-aspect-ratio: 1/3) and (min-aspect-ratio: 3/4) and (min-width:300px) {}
+
+/*    <--  Landscape layout / Standard (with min-width) -->     */
+@media screen and (min-aspect-ratio: 3/2) and (min-width:400px) {}
