@@ -1,0 +1,45 @@
+<div class="container-fluid" style="max-width: 941px;">
+    <div class="row">
+        <div class="col-12 order-2 col-sm-4 order-sm-1 d-flex justify-content-center">
+            <div>
+                <div style="display: inline-block;">
+                    <mat-form-field style="width: 132px;">
+                        <mat-select [(ngModel)]="this.filterProperty" (selectionChange)="filterOptionChanged($event.value)">
+                            <mat-option *ngFor="let filterOption of filterProperties | keyvalue" [value]="filterOption.value">
+                                {{filterOption['value']['label']}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="sort-dir-div">
+                    <button (click)="toggleModeChange()" mat-icon-button><mat-icon>{{descendingMode ? 'arrow_downward' : 'arrow_upward'}}</mat-icon></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 order-1 col-sm-4 order-sm-2 d-flex justify-content-center">
+            <h4 class="my-videos-title" i18n="My videos title">My videos</h4>
+        </div>
+        <div class="col-12 order-3 col-sm-4 order-sm-3 d-flex justify-content-center">
+            <mat-form-field [ngClass]="searchIsFocused ? 'search-bar-focused' : 'search-bar-unfocused'" class="search-bar" color="accent">
+                <input (focus)="searchIsFocused = true" (blur)="searchIsFocused = false" class="search-input" type="text" placeholder="Search" i18n-placeholder="Files search placeholder" [(ngModel)]="search_text" (ngModelChange)="onSearchInputChanged($event)" matInput>
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <ng-container *ngIf="normal_files_received">
+                <div *ngFor="let file of filtered_files; let i = index" class="mb-2 mt-2 d-flex justify-content-center" [ngClass]="[ postsService.card_size === 'small' ? 'col-2 small-col' : '', postsService.card_size === 'medium' ? 'col-6 col-lg-4 medium-col' : '', postsService.card_size === 'large' ? 'col-12 large-col' : '' ]">
+                    <app-unified-file-card [index]="i" [card_size]="postsService.card_size" [locale]="postsService.locale" (goToFile)="goToFile($event)" (goToSubscription)="goToSubscription($event)" [file_obj]="file" [use_youtubedl_archive]="postsService.config['Downloader']['use_youtubedl_archive']" [loading]="false" (deleteFile)="deleteFile($event)"></app-unified-file-card>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!normal_files_received && loading_files && loading_files.length > 0">
+                <div *ngFor="let file of loading_files; let i = index" class="mb-2 mt-2 d-flex justify-content-center" [ngClass]="[ postsService.card_size === 'small' ? 'col-2 small-col' : '', postsService.card_size === 'medium' ? 'col-6 col-lg-4 medium-col' : '', postsService.card_size === 'large' ? 'col-12 large-col' : '' ]">
+                    <app-unified-file-card [index]="i" [card_size]="postsService.card_size" [locale]="postsService.locale" [loading]="true" [theme]="postsService.theme"></app-unified-file-card>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+.large-col {
+    max-width: 320px;
+}
+
+.medium-col {
+    max-width: 240px;
+}
+
+.small-col {
+    max-width: 240px;
+}
+
+.search-bar {
+    transition: all .5s ease;
+    position: relative;
+    float: right;
+}
+ 
+.search-bar-unfocused {
+    width: 132px;
+}
+
+.search-input {
+    transition: all .5s ease;
+}
+
+.search-bar-focused {
+    width: 200px;
+}
+
+.flex-grid {
+    width: 100%;
+    display: block;
+    position: relative;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.column {
+    width: 33%;
+    display: inline-block;
+}
+
+.sort-dir-div {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+}
+
+.my-videos-title {
+    text-align: center;
+    position: relative;
+    top: 12px;
+}
+
+@media (max-width: 576px) {
+    .my-videos-title {
+        top: 0px;
+    }
+}
