@@ -10,9 +10,9 @@
 
 <body>
     <div class="showcase">
-        
-        <div id="pedistal1">Style 1 </div>
-        <div id="pedistal2">Style 2 </div>
+
+        <button id="test1">Normal</button>
+        <button id="test2">Imbeded function</button>
 
     </div>
 
@@ -20,11 +20,11 @@
     <script type="text/javascript">
 
         //(title, body, hover_title, ifunction)
-        document.getElementById('pedistal1').addEventListener('click', function () {
+        document.getElementById('test1').addEventListener('click', function () {
             notify.new('Notification', 'A basic notification', 'Click me to dismiss me');
         });
 
-        document.getElementById('pedistal2').addEventListener('click', function () {
+        document.getElementById('test2').addEventListener('click', function () {
             notify.new('Notification', 'A notification with an imbedded function', 'Click me to do a thing', function () { alert('You clicked, and i did a thing, as promised') });
         });
 
