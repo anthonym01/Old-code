@@ -1,347 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" type="text/css" id="notification_style" href="Notification_resourses/notification-light.css">
-<title>In page notification example</title>
-<style>
-/*  Animations  */
-@keyframes fade {from { opacity: 0.8; } 50% { opacity: 0.4; } to { opacity: 0.8; }}
+    <link rel="stylesheet" type="text/css" href="Notification_resourses/notification.css">
+    <title>In page notification example</title>
 
-/*Scrollbar custom*/
-::-webkit-scrollbar {/*scrollbar body*/
-width: 1vw;
-}
-::-webkit-scrollbar-track {/*Scrollbar background*/
-background: rgb(187, 187, 187); 
-}
-::-webkit-scrollbar-thumb {/*scrollbar thumb*/
-background: rgb(0, 0, 0); 
-}
-::-webkit-scrollbar-thumb:hover {/*hovering on scrollbar thumb*/
-background: rgb(82, 82, 82); 
-}
-
-body::before{/* Remove upon deployment*/
-    position: absolute;
-    z-index:-1;
-    content:"For testing purposes only (Landscape)";
-    font-size:5vw;
-    bottom:0vh;
-    height:auto;
-    width:98vw;
-    white-space: nowrap;
-    text-align: center;
-    animation:fade 3000ms infinite;
-}
-.showcase_title{
-    position:fixed;
-    top:20vh;
-    left:0;
-    width:100vw;
-    height:10vh;
-    font-size: 8.5vh;
-    text-align:center;
-    border-bottom:0.5vh solid #000000;
-    cursor: default;
-}
-.showcase{
-    position:fixed;
-    bottom:0;
-    left:0vw;
-    width:100vw;
-    height:70vh;
-    overflow: auto;
-}
-.pedistal{
-    position:relative;
-    height:25vh;
-    width:96vw;
-    float: left;
-    padding: 2vw;
-}
-
-/*Switches*/
-.switch_container_active{
-    width:12vh;
-    height:5vh;
-    border:0.5vh solid black;
-    border-radius: 5vh;
-    cursor:pointer;
-    box-shadow:0px 0px 0px 0px #000000;
-    transition: box-shadow;
-    transition: 300ms;
-}
-.switch_container_active .switchbdy{
-    position: absolute;
-    width:12vh;
-    height:5vh;
-    border-radius: 5vh;
-    cursor:pointer;
-    background-color: #ffffff;
-    transition: background-color;
-    transition-duration: 300ms;
-}
-.switch_container_active .switch{
-    top:0.2vh;
-    right:0.2vh;
-    position: absolute;
-    height:4.6vh;
-    width:4.6vh;
-    border-radius: 50%;
-    background-color: black;
-    z-index:1;
-    transform: translate(0px/*-39px*/,0);
-    transition: transform,background-color;
-    transition-duration: 300ms;
-}
-.switch_container_dissabled{
-    width:12vh;
-    height:5vh;
-    border:0.5vh solid rgb(122,122,122);
-    border-radius: 5vh;
-    cursor:pointer;
-    transition: box-shadow;
-    transition: 300ms;
-}
-.switch_container_dissabled .switchbdy{
-    position: absolute;
-    width:12vh;
-    height:5vh;
-    border-radius: 5vh;
-    cursor:pointer;
-    transition: background-color;
-    transition-duration: 300ms;
-}
-.switch_container_dissabled .switch{
-    top:0.2vh;
-    right:0.2vh;
-    position: absolute;
-    height:4.6vh;
-    width:4.6vh;
-    border-radius: 50%;
-    background-color: rgb(122,122,122);
-    z-index:1;
-    transform: translate(-7vh,0);
-    transition: transform,background-color;
-    transition-duration: 300ms;
-}
-
-    /*    <--  Landscape layout (with min-width) -->     */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    
-    /*  Animations  */
-    @keyframes fade {from { opacity: 0.8; } 50% { opacity: 0.4; } to { opacity: 0.8; }}
-
-    /*Scrollbar custom*/
-    ::-webkit-scrollbar {/*scrollbar body*/
-        width: 1vw;
-    }
-    ::-webkit-scrollbar-track {/*Scrollbar background*/
-        background: rgb(187, 187, 187); 
-    }
-    ::-webkit-scrollbar-thumb {/*scrollbar thumb*/
-        background: rgb(0, 0, 0); 
-    }
-    ::-webkit-scrollbar-thumb:hover {/*hovering on scrollbar thumb*/
-        background: rgb(82, 82, 82); 
-    }
-
-    body::before{/* Remove upon deployment*/
-        position: absolute;
-        z-index:-1;
-        content:"For testing purposes only (Landscape)";
-        font-size:5vh;
-        bottom:0vh;
-        height:auto;
-        width:98vw;
-        white-space: nowrap;
-        text-align: center;
-        animation:fade 3000ms infinite;
-    }
-    .showcase_title{
-        position:fixed;
-        top:20vh;
-        left:0;
-        width:100vw;
-        height:10vh;
-        font-size: 8.5vh;
-        text-align:center;
-        border-bottom:0.5vh solid #000000;
-        cursor: default;
-    }
-    .showcase{
-        position:fixed;
-        bottom:0;
-        left:0;
-        width:100vw;
-        height:70vh;
-        overflow: auto;
-    }
-    .pedistal{
-        position:relative;
-        height:25vh;
-        width:33.3vw;
-        float: left;
-        padding:0px;
-    }
-
-    /*Switches*/
-    .switch_container_active{
-        width:12vh;
-        height:5vh;
-        border:0.5vh solid black;
-        border-radius: 5vh;
-        cursor:pointer;
-        box-shadow:0px 0px 0px 0px #000000;
-        transition: box-shadow;
-        transition: 300ms;
-    }
-    .switch_container_active .switchbdy{
-        position: absolute;
-        width:12vh;
-        height:5vh;
-        border-radius: 5vh;
-        cursor:pointer;
-        background-color: #ffffff;
-        transition: background-color;
-        transition-duration: 300ms;
-    }
-    .switch_container_active .switch{
-        top:0.2vh;
-        right:0.2vh;
-        position: absolute;
-        height:4.6vh;
-        width:4.6vh;
-        border-radius: 50%;
-        background-color: black;
-        z-index:1;
-        transform: translate(0px/*-39px*/,0);
-        transition: transform,background-color;
-        transition-duration: 300ms;
-    }
-    .switch_container_dissabled{
-        width:12vh;
-        height:5vh;
-        border:0.5vh solid rgb(122,122,122);
-        border-radius: 5vh;
-        cursor:pointer;
-        transition: box-shadow;
-        transition: 300ms;
-    }
-    .switch_container_dissabled .switchbdy{
-        position: absolute;
-        width:12vh;
-        height:5vh;
-        border-radius: 5vh;
-        cursor:pointer;
-        transition: background-color;
-        transition-duration: 300ms;
-    }
-    .switch_container_dissabled .switch{
-        top:0.2vh;
-        right:0.2vh;
-        position: absolute;
-        height:4.6vh;
-        width:4.6vh;
-        border-radius: 50%;
-        background-color: rgb(122,122,122);
-        z-index:1;
-        transform: translate(-7vh,0);
-        transition: transform,background-color;
-        transition-duration: 300ms;
-    }
-}
-
-</style>
 </head>
+
 <body>
-    Notification theme:
-    <div class="switch_container_active" id="theme_switch_container">
-        <div class="switchbdy" id="theme_switchbdy">
-        <div id="theme_switchbtn" class="switch"></div>
-        </div>
+    <div class="showcase">
+        
+        <div id="pedistal1">Style 1 </div>
+        <div id="pedistal2">Style 2 </div>
+
     </div>
-<div class="showcase_title">Notification types</div>
-<div class="showcase" id="showcase">
-    <div class="pedistal" id="pedistal1">
-        <div class="notification_style1" id="test_style1" style="position: relative;transform: translate(2vw,4vh);">
-            <div class="title">Style 1</div>
-            <div class="notifbody">Click me!</div>
-        </div>
-    </div>
-    <div class="pedistal" id="pedistal2">
-        <div class="notification_style2" id="test_style2" style="position: relative;transform: translate(2vw,6.5vh);">
-            <div class="title">Style 2</div>
-            <div class="notifbody">Click me!</div>
-        </div>
-    </div>
-    <div class="pedistal" id="pedistal3">
-        <div class="notification_style3" id="test_style3" style="position: relative;transform: translate(2vw,6.5vh);">
-            <div class="title">Style 3</div>
-            <div class="notifbody">I have a logo! :)</div>
-        </div>
-    </div>
-    <div class="pedistal" id="pedistal4">
-        <div class="notification_style4" id="test_style4" style="position: relative;transform: translate(2vw,4vh);">
-            <div class="title">Style 4</div>
-            <div class="notifbody">Click me!</div>
-        </div>
-    </div>
-</div>
 
+    <script type="text/javascript" src="Notification_resourses/notification.js"></script>
+    <script type="text/javascript">
 
-<script type="text/javascript" src="Notification_resourses/notification.js"></script>
-<script type="text/javascript">
-var count=0;
+        //(title, body, hover_title, ifunction)
+        document.getElementById('pedistal1').addEventListener('click', function () {
+            notify.new('Notification', 'A basic notification', 'Click me to dismiss me');
+        });
 
-let Showcase = {/*  Showcase handler    */
-    test_style1:document.getElementById('test_style1').addEventListener('click',function(){
-        notify.new('Style 1','A simple flat notification, perfect for any occasion',1);
-    }),
-    test_style2:document.getElementById('test_style2').addEventListener('click',function(){
-        notify.new('Style 2','Bar type notification, good for horizontally challenged UI styles',2);
-    }),
-    test_style3:document.getElementById('test_style3').addEventListener('click',function(){
-        notify.new('Style 3','Bar type notification,with logo in the header',3);
-    }),
-    test_style4:document.getElementById('test_style4').addEventListener('click',function(){
-        notify.new('Style 4','Flat type with background transparency',4);
-    }),
+        document.getElementById('pedistal2').addEventListener('click', function () {
+            notify.new('Notification', 'A notification with an imbedded function', 'Click me to do a thing', function () { alert('You clicked, and i did a thing, as promised') });
+        });
 
-}
+        window.addEventListener('load', () => {
+            notify.new('Notification', 'Page loaded');
+        });
 
-let theme={
-    theme:"light",
-    click:document.getElementById('theme_switchbdy').addEventListener('click',function(){theme.flip();}),
-    flip:function(){
-        console.log('switch triggered');
-        if(this.theme=="light"){
-            //turn off the switch
-            this.theme="dark";
-            document.getElementById('theme_switch_container').className='switch_container_dissabled';
-            console.log('Theme set to dark');
-            document.getElementById('notification_style').href="Notification_resourses/notification-dark.css";
-            document.getElementById('showcase').style.backgroundColor='black';
-            document.getElementById('showcase').style.color='white';
-        }else if(this.theme=="dark"){
-            //turn on the witch
-            this.theme="light";
-            document.getElementById('theme_switch_container').className='switch_container_active';
-            console.log('Theme set to light');
-            document.getElementById('notification_style').href="Notification_resourses/notification-light.css";
-            document.getElementById('showcase').style.backgroundColor='white';
-            document.getElementById('showcase').style.color='black';
-        }
-    },
-}
-
-window.addEventListener('load',()=>{
-    notify.new('Hello','Page loaded',1);
-});
-
-
-
-</script>
+    </script>
 </body>
+
 </html>
