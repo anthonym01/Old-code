@@ -25,10 +25,8 @@
 /*
     If u dont nunderstand my code barf just use 'notify.new(notifiaction_title,notification_body);' to call the notification
 */
-window.addEventListener('resize', () => { notify.clearall() })
-
-let notify = {
-    array: [],
+let notify = {//notification function house
+    clap:window.addEventListener('resize', () => { notify.clearall() }),
     new: function (title, body, hover_title, ifunction) {
 
         let notification = document.createElement("div")
@@ -51,90 +49,52 @@ let notify = {
         notification.appendChild(notification_title)
         notification.appendChild(nbody)
         document.body.appendChild(notification)
-        notify.array.push(notification)
 
         if (typeof (ifunction) == 'function') { //imbedded function
-
             notification.addEventListener('click', ifunction);
             //Close button
             let xbutton = document.createElement('div')
             xbutton.setAttribute('class', 'x-button')
             notification.appendChild(xbutton)
             xbutton.title = 'click to dismiss';
-            xbutton.addEventListener('click', function (e) {
-                e.stopImmediatePropagation();
-                setTimeout(() => { notification.style.opacity = '0.0'; }, 100)
-                notification.style.transform = 'translate(35vw,0)'
-            })
-
+            xbutton.addEventListener('click', function (e) { removethis(e, notification) })
         } else {
-
-            notification.addEventListener('click', function () {
-                setTimeout(() => {
-                    this.style.opacity = '0.0';
-                    this.style.zIndex = '-999';
-                }, 100)
-                this.style.transform = 'translate(22rem,0)'
-            })
-
+            notification.addEventListener('click', function (e) { removethis(e, notification) })
         }
-
 
         //Timing effects
         setTimeout(() => {
-            notification.style.transform = 'translate(0,0)'
+            notification.style.transform = 'translateX(0)'
             notify.shove()
         }, 50);
 
         setTimeout(() => { notification.style.opacity = '0.0' }, 10000); //dissapear
 
-        setTimeout(() => { document.body.removeChild(notify.array.shift()) }, 11000); //remove from document
+        setTimeout(() => { try { document.body.removeChild(notification) } catch (err) { console.warn(err) } }, 11000); //remove from document
+
+        function removethis(e, rnotification) {
+            e.stopImmediatePropagation();
+            rnotification.style.transform = 'translateX(22rem)';
+            setTimeout(() => { rnotification.style.opacity = '0.0'; }, 100)
+            setTimeout(() => { try { document.body.removeChild(notification) } catch (err) { console.warn(err) } }, 1000)
+        }
 
     },
     shove: function () {
-
-        var reverse = notify.array.length - 1;
-        for (let i  in notify.array) {
-            try {
-                notify.array[i].style.transform = 'translate(0,' + -reverse * 9 + 'rem)';//9 rem., height of notification
-            } catch (err) { console.log(err) }
+        var notifications = document.querySelectorAll(".notification")
+        var reverse = notifications.length - 1;
+        for (let i in notifications) {
+            notifications[i].style.transform = 'translateY(' + -reverse * 9 + 'rem)';//9 rem., height of notification
             reverse--;//get it, because oposite
         }
-        /*
-        var notifications = document.querySelectorAll(".notification")
-        console.log(notifications)
-        for (let i = notifications.length + 1; i > 0; i--) {
-            try {
-                notifications[i].style.transform = 'translate(0,' + -i * 9 + 'rem)';//9 rem., height of notification
-            } catch (err) { console.log(err) }
-        }
-        /*for (let i = 0; i < notifications.length - 1; i++) {
-            try {
-                notifications[i].style.transform = 'translate(0,' + Number(-i * 9) + 'rem)';//9 rem., height of notification
-            } catch (err) {
-                console.log(err)
-            }
-        }*/
-
-
-
-        /*forEach((notification,key) => {
-            try {
-                console.log(key)
-                notification.style.transform = 'translate(0,'+-key*9+'rem)';//9 rem., height of notification
-            } catch (err) {
-                console.log(err)
-            }
-        })*/
     },
     clearall: function () {
         document.querySelectorAll(".notification").forEach((notification) => {
             try {
                 notification.style.opacity = '0.0';
                 notification.style.transform = 'translate(0,0)'
-                //document.body.removeChild(notification)
             } catch (err) {
-                console.log(err)
+                console.warn(err)
             }
         })
     }

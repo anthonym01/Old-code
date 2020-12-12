@@ -14,26 +14,23 @@
     }
 }
 
-
 .notification {
     position: fixed;
     bottom: 0.2rem;
     right: 0.5rem;
     height: 9rem;
-    width: 20rem;
-    transform: translate(22rem, 22rem);
+    width: 20rem; /*320px at default zoom*/
+    transform: translateX(22rem);
     background-color: rgba(0, 0, 0, 1);
     color: rgb(255, 255, 255);
     overflow: hidden;
-    box-shadow: 0vh 0vh 0.5vh 0vh #fafafa;
+    box-shadow: 0 0 0.2rem 0 #00ccff;
     cursor: pointer;
-    transition: transform 500ms, box-shadow 200ms;
+    transition: transform 500ms, box-shadow 200ms,opacity 200ms;
     -webkit-user-select: none;
 }
 
-.notification:hover {
-    box-shadow: 0vh 0vh 2vh 0vh #ffffff;
-}
+.notification:hover { box-shadow: 0 0 1rem 0 #00ccff; }
 
 .notification .title {
     position: absolute;
@@ -77,8 +74,8 @@
 
 /* notification X button */
 .x-button {
-    height: 4vh;
-    width: 4vh;
+    height: 1.9rem;
+    width: 1.9rem;
     position: absolute;
     top: 0;
     right: 0;
@@ -89,104 +86,28 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: 0.4vh;
+    width: 0.19rem;
     content: "";
     background-color: #f00;
-    border-radius: 0.5vh;
+    border-radius: 0.25rem;
     transition: transform 300ms, box-shadow 200ms;
 }
 
 .x-button::before {
     /*Left */
-    right: 1.8vh;
+    right:45%;
     transform: rotate(-45deg);
 }
 
 .x-button::after {
     /*Right */
-    left: 1.8vh;
+    left: 45%;
     transform: rotate(45deg);
 }
 
-.x-button:hover::before {
-    transform: rotate(-230deg);
-}
+.x-button:hover::before { transform: rotate(-230deg); }
 
-.x-button:hover::after {
-    transform: rotate(230deg);
-}
+.x-button:hover::after { transform: rotate(230deg); }
 
 .x-button:hover::before,
-.x-button:hover::after {
-    box-shadow: 0vh 0vh 1vh 0vh #fff
-}
-
-/*    <--  Landscape layout (with min-width) -->     */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    @keyframes stretch {
-        from {
-            width: 0%
-        }
-
-        to {
-            width: 100%
-        }
-    }
-
-    /*
-    .notification_style4 {
-        position: fixed;
-        bottom: 2vh;
-        right: 1vw;
-        height: 20vh;
-        width: 20vw;
-        transform: translate(20vw, 0vh);
-        background-color: rgba(0, 0, 0, 0.6);
-        color: rgb(255, 255, 255);
-        overflow: hidden;
-        box-shadow: 0vh 0vh 0.5vh 0vh #ffffff;
-        cursor: pointer;
-        transition: transform 500ms, box-shadow 200ms;
-    }
-
-    .notification_style4:hover {
-        box-shadow: 0vh 0vh 2vh 0vh #ffffff;
-    }
-
-    .notification_style4 .title {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 5.5vh;
-        font-size: 4.5vh;
-        text-align: center;
-        white-space: nowrap;
-        cursor: inherit;
-    }
-
-    .notification_style4 .title::before {
-        position: absolute;
-        transform: translate(0, 0vh);
-        top: 0;
-        left: 0;
-        z-index: 99;
-        background-color: rgb(255, 255, 255);
-        height: 0.5vh;
-        animation: stretch 11000ms;
-        content: "";
-        cursor: inherit;
-    }
-
-    .notification_style4 .notifbody {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 95%;
-        padding: 0.5vh 0.5vw;
-        height: 13vh;
-        font-size: 2.5vh;
-        overflow: hidden;
-        cursor: inherit;
-    }*/
-}
+.x-button:hover::after { box-shadow: 0 0 0.3rem 0 #fff; }
